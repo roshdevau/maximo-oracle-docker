@@ -1,5 +1,4 @@
-# maximo-oracle-docker
-Maximo 761 with an Oracle backend
+# Maximo 761 on WebSphere 9 with an Oracle 12c backend
 
 This project is inspired by the maximo-docker github project https://github.com/nishi2go/maximo-docker and the Oracle DB github project  https://github.com/oracle/docker-images/.
 
@@ -19,6 +18,25 @@ The list of IBM Installers required are:
 * MAX_LNEAR_ASET_MGR_7.6_MP_ML.zip - Maximo 7.6 Linear installation files
 * MAM_Scheduler_7.6.7.zip - Maximo 767 Scheduler Installation files
 
-# Creating Images
+# Cloning Repository
 
+git clone https://github.com/roshdevau/maximo-oracle-docker
+
+# Creating Images
+Navigate to the folder created and execute as below:
+
+cd oracle
+./buildDockerImage.sh -v 12.2.0.1 -e
+cd ..
+docker build -t maximo/maxwas:9.0.0.7 -t maximo/maxwas:latest --network build maxwas
+docker build -t maximo/maxdmgr:9.0.0.7 -t maximo/maxdmgr:latest --network build maxdmgr
+docker build -t maximo/maxapps:9.0.0.7 -t maximo/maxapps:latest --network build maxapps
+docker build -t maximo/maxweb:9.0.0.7 -t maximo/maxweb:latest --network build maxweb
+docker build -t maximo/maximo:7.6.1.1 -t maximo/maximo:latest --network build maximo
+	
 # Creating the Containers
+docker-compose up -d
+# Removing the Containers and Network
+docker-compose down
+# Viewing Logs of all containers together
+docker-compose logs -f
