@@ -19,15 +19,23 @@ The list of IBM Installers required are:
 * MAM_Scheduler_7.6.7.zip - Maximo 767 Scheduler Installation files
 
 # Cloning Repository
-
+## Clone repository
 git clone https://github.com/roshdevau/maximo-oracle-docker
+## Preparation
+These installer files must be placed in the **maximo-oracle-docker/binaries** folder
+
+Once done run the below command to run an nginx server to serve up a webserver to access the installers during the creation of the images:
+* Create a Network for the creation of the images - **docker network create build** 
+* Command to provision a HTTP Server - **docker run -d --name ibmbinaries -h ibmbinaries --network build -v ~/binaries:/usr/local/apache2/htdocs/ --restart always httpd:2.4**
+
+
+
+
 
 # Creating Images
 Navigate to the folder created and execute as below:
 
-cd oracle
-./buildDockerImage.sh -v 12.2.0.1 -e
-cd ..
+oracle/buildDockerImage.sh -v 12.2.0.1 -e
 docker build -t maximo/maxwas:9.0.0.7 -t maximo/maxwas:latest --network build maxwas
 docker build -t maximo/maxdmgr:9.0.0.7 -t maximo/maxdmgr:latest --network build maxdmgr
 docker build -t maximo/maxapps:9.0.0.7 -t maximo/maxapps:latest --network build maxapps
