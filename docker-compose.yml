@@ -1,0 +1,77 @@
+version: '3.6'
+services:
+  oracle:
+    hostname: oracle
+    environment:
+      - ORACLE_SID=MAXDB761
+      - ORACLE_PWD=Fujitsu123#
+    networks:
+      - maxnet
+    volumes:
+      - ~/oradata:/opt/oracle/oradata
+    ports:
+      - 1521:1521
+    image: oracle/database:12.2.0.1-ee
+    privileged: true
+  maxdmgr:
+    image: maximo/maxdmgr
+    hostname: maxdmgr
+    ports:
+      - 9043:9043
+    environment:
+      - PROFILE_NAME=ctgDmgr01
+      - CELL_NAME=ctgCell01
+      - NODE_NAME=ctgCellManager01
+    networks:
+      - maxnet
+  maxapps:
+    image: maximo/maxapps
+    hostname: maxapps
+    environment:
+      - PROFILE_NAME=ctgAppSrv01
+      - CELL_NAME=ctgNodeCell01
+      - NODE_NAME=ctgNode01
+    depends_on:
+      - maxdmgr
+      - maxweb
+      - oracle
+    networks:
+      - maxnet
+  maxweb:
+    image: maximo/maxweb
+    hostname: maxweb
+    environment:
+      - PROFILE_NAME=ctgWebSrv01
+      - CELL_NAME=ctgNodeWSCell01
+      - NODE_NAME=ctgNodeWebSrv01
+    ports:
+      - 80:80
+    depends_on:
+      - maxdmgr
+    networks:
+      - maxnet
+  maximo:
+    image: maximo/maximo
+    hostname: maximo
+    environment:
+      - WAS_DM_PROFILE_NAME=ctgDmgr01
+      - WAS_DM_NODE_NAME=ctgCellManager01
+      - WAS_NODE_NAME=ctgNode01
+      - SMTP_SERVER_HOST_NAME=localhost
+      - ADMIN_EMAIL_ADDRESS=root@localhost
+#      - ADD_LANGS=ja,fr
+      - BASE_LANG=en
+      - UPDATE_APPS_ON_REBOOT=no
+      - KEEP_RUNNING=no
+      - ENABLE_DEMO_DATA=no
+    depends_on:
+      - oracle
+      - maxapps
+      - maxweb
+    networks:
+      - maxnet
+networks:
+  maxnet:
+volumes:
+  maxdb76:
+  vardb2:
