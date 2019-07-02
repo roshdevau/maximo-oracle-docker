@@ -18,21 +18,41 @@ The list of IBM Installers required are:
 * MAX_LNEAR_ASET_MGR_7.6_MP_ML.zip - Maximo 7.6 Linear installation files
 * MAM_Scheduler_7.6.7.zip - Maximo 767 Scheduler Installation files
 
+# Steps
+## Clone Repository
+  git clone https://github.com/roshdevau/maximo-oracle-docker.git
 
-# Creating Images
-Clone Repository
-git clone https://github.com/roshdevau/maximo-oracle-docker.git
-
-Navigate to the repository folder
+## Navigate to the repository folder
 cd maximo-oracle-docker
 
-Place the above installer files in the directory **maximo-oracle-docker/binaries** before proceeding.
+## Download and place installers in binaries folder
+Down the IBM Installers from Passport Advantage and the Oracle DB installer from the Oracler website
+Place these binaries in the directory **maximo-oracle-docker/binaries** before proceeding.
+## Create Images
 Execute the below command in the maximo-oracle-docker directory
 ./buildMaximoImages.sh
+The above script runs the following commands:
+* Remove the **build** network
+* Create the **build** network
+* Create the IBM Installation Manager image
+* Create the Oracle 12c Image
+* Create the Websphere Application Server Image
+* Create the Deployment Manager Image
+* Create the Application Server Image
+* Create the Webserver image
+* Create the Maximo image
 
 # Creating the Containers
+For the Oracle container in the docker-compose.yml file update the host volume. In its current value the /home/<user>/oradata is mapped to the folder where the oracle database file will be created. Update if necessary to point to filesystem that has enough space.
+Run the below command to create containers and network if they do not exist.  
 docker-compose up -d
+
+Update the docker-compose.yml file to allow containers to restart automatically when the host VM restarts by adding the tag,
+restart: always
+
 # Removing the Containers and Network
+In order to remove all containers and including removal of any network created for the containers execute the below command:
 docker-compose down
+
 # Viewing Logs of all containers together
 docker-compose logs -f
