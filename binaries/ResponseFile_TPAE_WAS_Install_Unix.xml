@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<agent-input>
+  <variables>
+    <variable name='sharedLocation' value='/opt/IBM/IBMIMShared'/>
+  </variables>
+  <server>
+    <!-- Provide the repository location for the  WebSphere Application Server version 9.0.0.7 offering package -->
+	<!-- Use a URL or Universal Naming Convention path to specify the location of remote repositories. --> 
+	<!-- To specify a local repository, provide a directory path -->
+    <repository location='/Launchpad/Install/mwi_madt_WASv9.0.0.7_images'/>
+    <repository location='/Launchpad/Install/MWInstallerRepository'/>
+    <repository location='/Launchpad/Install/ConfigToolRepository'/>
+  </server>
+  <!-- A profile is an installation location. The 'installLocation' keyword determines                -->
+  <!--     the base installation path.                                                                -->
+  <!-- Specify a Maximo Asset Management V7.6.1 installation location.                                -->
+  <!--    Do not reuse the installation location of a currently installed Maximo product.             -->
+  <!--    If another Maximo product has been installed, both the profile id AND the installLocation   -->
+  <!--        need to be changed to unique values.  The profile id must also match the values         -->
+  <!--        supplied near the bottom of this file, in the install section, for : <offering profile= -->
+	  
+  <!-- # WAS Install Path                                      -->
+  <!-- # Default value for Unix: /opt/IBM/WebSphere/AppServer  -->
+  <!-- # Default value for Aix: /usr/IBM/WebSphere/AppServer   -->
+  <profile id='IBM HTTP Server V9.0' installLocation='/opt/IBM/HTTPServer'>
+    <data key='user.ihs.http.server.service.name.key' value='IBMHTTPServerV9.0'/>
+    <data key='user.ihs.http.server.service.name' value='IBM HTTP Server V9.0'/>
+    <data key='user.ihs.win.serverServicePassword' value='XjTveChg5ba6olBVMK/Reg=='/>
+    <data key='user.ihs.allowNonRootSilentInstall' value='true'/>
+    <data key='user.ihs.win.serverServiceLogOnAsLocalSystem' value='true'/>
+    <data key='user.ihs.win.serverServiceUser' value='root'/>
+    <data key='user.ihs.httpPort' value='80'/>
+  </profile>
+  <install>
+    <!-- IBM HTTP Server para WebSphere Application Server 9.0.0.7 -->
+    <offering profile='IBM HTTP Server V9.0' id='com.ibm.websphere.IHS.v90' features='core.feature'/>
+    <!-- IBM SDK, Java Technology Edition, 8 8.0.3.0 (build 6480sr3ifx-20160615_01) -->
+    <offering profile='IBM HTTP Server V9.0' id='com.ibm.java.jdk.v8' features='com.ibm.sdk.8'/>
+  </install>
+  <profile id='IBM WebSphere Application Server V9.0' installLocation='/opt/IBM/WebSphere/AppServer'>
+  </profile>
+  <install>
+    <!-- IBM WebSphere Application Server Network Deployment  9.0.0.7 -->
+    <offering profile='IBM WebSphere Application Server V9.0' id='com.ibm.websphere.ND.v90' features='core.feature,ejbdeploy,thinclient,embeddablecontainer'/>
+    <!-- IBM SDK, Java Technology Edition, 8 8.0.3.0 (build 6480sr3ifx-20160615_01) -->
+    <offering profile='IBM WebSphere Application Server V9.0' id='com.ibm.java.jdk.v8' features='com.ibm.sdk.8'/>
+  </install>
+  <profile id='Web Server Plug-ins for IBM WebSphere Application Server V9.0' installLocation='/opt/IBM/WebSphere/Plugins'>
+  </profile>
+  <install>
+    <!-- Web Server Plug-ins para IBM WebSphere Application Server 9.0.0.7 -->
+    <offering profile='Web Server Plug-ins for IBM WebSphere Application Server V9.0' id='com.ibm.websphere.PLG.v90' features='core.feature'/>
+    <!-- IBM SDK, Java Technology Edition, 8 8.0.3.0 (build 6480sr3ifx-20160615_01) -->
+    <offering profile='Web Server Plug-ins for IBM WebSphere Application Server V9.0' id='com.ibm.java.jdk.v8' features='com.ibm.sdk.8'/>
+  </install>
+  <profile id='WebSphere Customization Toolbox V9.0' installLocation='/opt/IBM/WebSphere/Toolbox'>
+  </profile>
+  <install>
+    <!-- WebSphere Customization Toolbox 9.0.0.7 -->
+    <offering profile='WebSphere Customization Toolbox V9.0' id='com.ibm.websphere.WCT.v90' features='core.feature,pct,zpmt,zmmt'/>
+    <!-- IBM SDK, Java Technology Edition, 8 8.0.3.0 (build 6480sr3ifx-20160615_01) -->
+    <offering profile='WebSphere Customization Toolbox V9.0' id='com.ibm.java.jdk.v8' features='com.ibm.sdk.8'/>
+  </install>
+  <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
+</agent-input>

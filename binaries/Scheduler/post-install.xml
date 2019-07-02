@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- **************************************************** Begin Standard Header - Do not add comments here ***
+* Licensed Materials - Property of IBM
+* 
+* 5724-U18
+*
+* (C) Copyright IBM Corp. 2014  All Rights Reserved.
+*
+* US Government Users Restricted Rights - Use, duplication, or
+* disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+********************************************************* End Standard Header -->
+<agent-input clean='true' temporary='true'>
+<server>
+    <repository location='/Launchpad/addons/MAM_Scheduler_7.6.7/SchedulerInstallerRepository.zip'/>
+</server>
+</agent-input>
