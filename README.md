@@ -26,8 +26,8 @@ The list of IBM Installers required are:
 cd maximo-oracle-docker
 
 ## Download and place installers in binaries folder
-Down the IBM Installers from Passport Advantage and the Oracle DB installer from the Oracler website
-Place these binaries in the directory **maximo-oracle-docker/binaries** before proceeding.
+Before proceeding please download the IBM Installers from Passport Advantage and the Oracle DB installer from the Oracler website
+Place these binaries in the directory **maximo-oracle-docker/binaries**.
 ## Create Images
 Execute the below command in the maximo-oracle-docker directory
 ./buildMaximoImages.sh
