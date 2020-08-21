@@ -2,12 +2,12 @@
 
 #Main
 
-sqlplus sys/Fujitsu123#@//oracle:1521/MAXDB761 as sysdba <<EOF
+sqlplus sys/Hello123#@//oracle:1521/MAXDB761 as sysdba <<EOF
 alter session set "_ORACLE_SCRIPT"=true;
 CREATE TABLESPACE MAXDATA DATAFILE 'maxdata.dbf' SIZE 1000M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
 create temporary tablespace maxtemp tempfile 'maxtemp.dbf' SIZE 1000M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
 CREATE TABLESPACE MAXINDEX DATAFILE 'maxindex.dbf' SIZE 1000M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
-create user maximo identified by Fujitsu123# default tablespace maxdata temporary tablespace maxtemp;
+create user maximo identified by "Hello123#" default tablespace maxdata temporary tablespace maxtemp;
 grant dba to maximo;
 grant connect to maximo;
 grant create job to maximo;
