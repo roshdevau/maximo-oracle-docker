@@ -4,7 +4,7 @@ services:
     hostname: oracle
     environment:
       - ORACLE_SID=MAXDB761
-      - ORACLE_PWD=Fujitsu123#
+      - ORACLE_PWD=Hello123#
     networks:
       - maxnet
     volumes:
